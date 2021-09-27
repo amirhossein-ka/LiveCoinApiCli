@@ -68,6 +68,7 @@ cli
 
 cli:command("status", "See the status of api"):action(function(parsed, command, app)
 	local stat = LiveCoin.status_ok()
+	print(stat)
 	if table.concat(stat) == "{}" then
 		print("Server is Up And Ready To GO !")
 	else
@@ -85,7 +86,7 @@ end)
 
 cli
 	:command("overview", "Get current aggregated data for all coins.")
-	:option({ long = "currency", short = "c", description = "any valid coin or fiat code" })
+	:option({ long = "currency", short = "c", description = "any valid coin or fiat code", default = "BTC" })
 	:action(function(parsed, command, app)
 		local api_key = getApiKey()
 		local result = LiveCoin.overview(api_key, parsed.currency)
